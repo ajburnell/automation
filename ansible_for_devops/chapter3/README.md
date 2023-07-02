@@ -1,4 +1,4 @@
-* Standing up multiple infrastructure servers with Vagrant and running ad-hoc commands.
+## Standing up multiple infrastructure servers with Vagrant and running ad-hoc commands.
 All credit too: https://www.ansiblefordevops.com/
 
 Example commands:
