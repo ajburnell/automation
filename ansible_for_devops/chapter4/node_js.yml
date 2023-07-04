@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    node_apps_location:  /usr/local/opt/node
+
+  - name: Install EPEL repo.
+    dnf: name=epel-release state=present
+
+  - name: Import Remi GPG key.
+    rpm_key:
+      key: "https://rpms.remirepo.net/RPM-GPG-KEY-remi2023"
+      state: present
+
+  - name: Install Remi repo.
+    dnf:
+      name:  "https://rpms.remirepo.net/enterprise/remi-release-9.rpm"
+      state: present
+
+  - name: Ensure firewalld is stopped (as this is for testing only).
+    service: name=firewalld state=stopped
+
+  - name: Install Node.js and npm.
+    dnf: name=npm state=present enablerepo=epel
+
+  - name: Install Forever (to run our Node.js app).
+    npm: name=forever global=yes state=present
